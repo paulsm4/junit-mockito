@@ -32,6 +32,32 @@ speed-measure-plugin.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# MS Visual Studio
+.vs/
+nupkg/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+.DS_Store/
+*.swp
+*.*~
+*.suo
+*.user
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# EntityframeworkCore
+Migrations/
+
 # misc
 connect.lock/
 coverage/
