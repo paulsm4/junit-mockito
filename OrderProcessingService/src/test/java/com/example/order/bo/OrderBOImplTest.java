@@ -59,7 +59,7 @@ public class OrderBOImplTest {
 	public void placeOrderShouldCreateAnOrder() throws SQLException, BOException {
 		Order order = new Order();
 		//when(dao.create(order)).thenReturn(new Integer(1));  // Original: stub "dao.create()" with a specific "order"
-		when(dao.create(any(Order.class))).thenReturn(new Integer(1));
+		when(dao.create(any(Order.class))).thenReturn(new Integer(1)); // Use Mockito Matcher API
 		boolean result = bo.placeOrder(order);
 		
 		assertTrue(result);
@@ -94,7 +94,8 @@ public class OrderBOImplTest {
 	public void cancelOrderShouldCancelTheOrder() throws SQLException, BOException {
 		// Set expections
 		Order order = new Order();
-		when(dao.read(ID)).thenReturn(order);	
+		// when(dao.read(ID)).thenReturn(order);	// Original
+		when(dao.read(anyInt())).thenReturn(order);  // Use Mockito Matcher API
 		when(dao.update(order)).thenReturn(1);	
 		
 		boolean result = bo.cancelOrder(ID);
