@@ -58,11 +58,19 @@ public class OrderBOImplTest {
 	@Test
 	public void placeOrderShouldCreateAnOrder() throws SQLException, BOException {
 		Order order = new Order();
-		when(dao.create(order)).thenReturn(new Integer(1));
+		//when(dao.create(order)).thenReturn(new Integer(1));  // Original: stub "dao.create()" with a specific "order"
+		when(dao.create(any(Order.class))).thenReturn(new Integer(1));
 		boolean result = bo.placeOrder(order);
 		
 		assertTrue(result);
 		Mockito.verify(dao).create(order);
+		
+		verify(dao, times(1)).create(order);  // Original: Passes
+		// verify(dao, times(2)).create(order);  // Fails: "Wanted 2 times, But was 1 time..."
+		// Exception: org.mockito.exceptions.verification.TooLittleActualInvocations
+		verify(dao, atLeastOnce()).create(order); // Passes
+		verify(dao, atLeast(1)).create(order); // Passes
+		
 	}
 
 	@Test
