@@ -127,5 +127,33 @@ public class OrderBOImplTest {
 		boolean result = bo.cancelOrder(ID);
 	}
 	
-	// "deleteOrder()" unit tests TBD... 
+	@Test
+	public void deleteOrderShouldDeleteTheOrder() throws SQLException, BOException {
+		when(dao.delete(ID)).thenReturn(1);	
+		boolean result = bo.deleteOrder(ID);
+		assertTrue(result);
+		verify(dao).delete(ID);
+	}
+	
+	@Test
+	public void deleteOrderShouldNotDeleteTheOrder() throws SQLException, BOException {
+		when(dao.delete(ID)).thenReturn(0);	
+		boolean result = bo.deleteOrder(ID);
+		assertFalse(result);
+		verify(dao).delete(ID);
+	}
+
+	@Test(expected=BOException.class)  // JUnit4 syntax
+	public void deletelOrderShouldThrowBOException() throws SQLException, BOException {
+		when(dao.delete(ID)).thenThrow(SQLException.class);	// ... before we can test this
+		boolean result = bo.deleteOrder(ID);
+	}
+	
+	@Test
+	public void getDaoShouldReturnDao() {
+		OrderDAO result = bo.getDao();
+		assertNotNull(result);
+		assertEquals(result, dao);
+	}
+	
 }
