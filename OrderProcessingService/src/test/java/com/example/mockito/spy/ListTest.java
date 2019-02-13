@@ -16,7 +16,7 @@ public class ListTest {
 
 	// We are *partially* mocking "myList" with @Spy
 	@Spy
-	List<String> myList = new ArrayList<String>();
+	private List<String> myList = new ArrayList<String>();
 	
 	@Before
 	public void init() {
