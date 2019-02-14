@@ -10,6 +10,7 @@ public class OrderBOImpl implements OrderBO {
 
 	private OrderDAO dao;
 	
+	@Override
 	public boolean placeOrder(Order order) throws BOException {
 		try {
 			int result = dao.create(order);
@@ -21,6 +22,7 @@ public class OrderBOImpl implements OrderBO {
 		return true;
 	}
 
+	@Override
 	public boolean cancelOrder(int id) throws BOException {
 		try {
 			Order order = dao.read(id);
